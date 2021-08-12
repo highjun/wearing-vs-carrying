@@ -34,7 +34,6 @@ for name in os.listdir("../Raw"):
     data_arr[name].insert(0, "day", [(timestamp- start).days for timestamp in data_arr[name]["timestamp"]])
 
 def getPlotlyGraph(name, input_timestamp):
-    start = dt.datetime.strptime(setting[name][0],"%Y-%m-%d %H:%M")
     input_timestamp = dt.datetime.strptime(input_timestamp,"%Y-%m-%d")
 
     step_count = data_arr[name]
@@ -61,14 +60,14 @@ app.layout = html.Div(children=[
     dcc.Dropdown(
         id='input_name',
         options= [{'label': i, 'value':i} for i in sorted(os.listdir("../Raw"))],
-        value='P1'
+        value='P3'
     ),
     dcc.DatePickerSingle(
         id='timestamp',
         min_date_allowed=dt.date(2020, 8, 5),
         max_date_allowed=dt.date(2021, 9, 19),
-        initial_visible_month=dt.date(2021, 8, 5),
-        date = dt.date(2020,12,24)
+        initial_visible_month=dt.date(2021, 8, 9),
+        date = dt.date(2021,8,9)
     ),
     dcc.Graph(
         id = 'graph',
