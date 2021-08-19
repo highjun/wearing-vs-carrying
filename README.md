@@ -1,13 +1,14 @@
 ### Carrying VS Wearing Data Analysis
 
 #### 해볼 것
-- [ ]: Activity Definition
-- [ ]: 핸드폰 기종과 워치 기종에 따른 차이가 많이 나는지?
-- [ ]: 각 Daily Step을 집단으로 분류할 수 있는지?
-- [ ]: 분류된 Daily Step을 기준으로 각 User가 얼마나 Consistent한 Behavior를 보여주는가?
-- [ ]: User를 집단으로 분류할 수 있는지?
-- [ ]: Watch 미착용 구간 구별 가능?
-- [ ]: 별 의미없는 Error나 실제로 움직이지 않았음에도 측정된 구간 존재?
+- [ ] Activity Definition
+- [ ] 핸드폰 기종과 워치 기종에 따른 차이가 많이 나는지?
+- [ ] 각 Daily Step을 집단으로 분류할 수 있는지?
+- [ ] 분류된 Daily Step을 기준으로 각 User가 얼마나 Consistent한 Behavior를 보여주는가?
+- [ ] User를 집단으로 분류할 수 있는지?
+- [ ] Watch 미착용 구간 구별 가능?
+- [ ] 별 의미없는 Error나 실제로 움직이지 않았음에도 측정된 구간 존재?
+- [ ] Poisson Distribution * Step per Activity Distribution, lambda가 시간에 따라서 변화하도록 Modeling?
 
 #### Experiments
 1. Activity Duration distribution per User/Device
