@@ -16,8 +16,6 @@ pd.set_option("expand_frame_repr", False)
 pd.set_option("max_columns", 20)
 np.printoptions(precision=2, suppress=True)
 
-with open("../setting.json") as f:
-    setting = json.load(f)
 data_arr = []
 for id in sorted(os.listdir("../Raw")):
     data_arr.append(pd.read_excel(f"../Preprocess/{id}.xlsx"))

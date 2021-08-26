@@ -18,17 +18,25 @@ else:
 
 for idx, folder in enumerate(sorted(os.listdir("Raws"))):
     raw = pd.read_csv(glob.glob(f"Raws/{folder}/**/com.samsung.shealth.tracker.pedometer_step_count.*.csv", recursive= True)[0],
-                                        skiprows=[0,1], usecols = [0,2,3,4,5,9,10,11,12], header= 0, 
-                                        names = ["duration", "run", "walk", "timestamp", "device", "step", "speed", "distance", "calorie"])
+                                        skiprows=[0], usecols = [ord("E")-ord("A"),ord("J")-ord("A"),ord("O")-ord("A")], header= 0, 
+                                        names = ["timestamp", "step", "uuid"])
+    device_profile = pd.read_csv(glob.glob(f"Raws/{folder}/**/com.samsung.health.device_profile.*.csv", recursive= True)[0],
+                        skiprows=[0], usecols = [ord("G")-ord("A"),ord("M")-ord("A")], header= 0, 
+                        names = ["device_group","uuid"])
+    wearable = device_profile.query("device_group ==360003")["uuid"].values
+    mobile = device_profile.query("device_group ==360001")["uuid"].values
     # device can be identified by its logging position, but for fir duration being na
-    raw["device"] = ["watch" if (row["device"] == 230002 or row["duration"] != row["duration"]) else "phone" for _, row in raw.iterrows()]
+    raw["device"] = ["watch" if row["uuid"] in wearable else "phone" for _, row in raw.iterrows()]
+    # raw = raw[["timestamp","step","device"]]
     # sort by timestamp and device
     raw.sort_values(["timestamp", "device"], inplace = True)
     raw = raw.fillna(0)
     # Timestamp was logged as UTC+000, so convert it to UTC+900, also it was loaded as string, so convert to datetime object
     raw["timestamp"] = [ timestamp  + dt.timedelta(hours = 9) for timestamp in pd.to_datetime(raw["timestamp"], format="%Y-%m-%d %H:%M")]
+    raw = raw.groupby(["timestamp","device","uuid"]).sum()
+    raw.reset_index(inplace = True)
     start = raw.iloc[0]["timestamp"] 
-    end = raw.iloc[-1]["timestamp"]  
+    end = raw.iloc[-1]["timestamp"] 
     def total_day(x):
             x = set([i.date() for i in x])
             return len(x)
@@ -106,11 +114,11 @@ for idx, folder in enumerate(sorted(os.listdir("Raws"))):
     raw.insert(0, "hour", [timestamp.hour for timestamp in raw["timestamp"]])
     raw.fillna(0, inplace = True)
     raw.reset_index(drop = True, inplace = True)
-    raw.to_excel(f"Preprocess/{idx}.xlsx")
+    raw.to_excel(f"Preprocess/{folder}.xlsx")
     all_users.append(raw)
     print(f"{folder} is done")
 
-all = pd.concat(all_users, keys = list(range(len(all_users))))
+all = pd.concat(all_users, keys = sorted(os.listdir("Raws")))
 all["user"] = all.index.get_level_values(0)
 all.reset_index(drop = True, inplace = True)
 all.to_excel(f"Preprocess/all_user.xlsx")

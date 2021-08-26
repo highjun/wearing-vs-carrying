@@ -13,10 +13,11 @@ ids ={}
 all_uuid = ["VfS0qUERdZ", "Mk66SbFqK1"]
 
 
-# for zip_file in sorted(glob.glob(f"{path_to_zip}/*.zip")):
-#     print(zip_file)
-#     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
-#         zip_ref.extractall(f"{path_to_raw}/{os.path.basename(zip_file)}")
+for zip_file in sorted(glob.glob(f"{path_to_zip}/*.zip")):
+    name = os.path.splitext(os.path.basename(zip_file))[0]
+    with zipfile.ZipFile(zip_file, 'r') as zip_ref:
+        zip_ref.extractall(f"{path_to_raw}/{name}")
+    print(f"{zip_file} is extracted as {name}")
 
 n_failed = 0
 n_total = len(glob.glob(f"{path_to_raw}/*"))
@@ -53,4 +54,4 @@ for idx, folder in enumerate(sorted(glob.glob("Raws/*"))):
     except Exception as e:
         print(f"{folder}는 {e.args[0]}")
         n_failed += 1 
-print(f"총 {n_total}개의 데이터 중 {n_failed}는 실패했습니다.")
+print(f"총 {n_total}개의 데이터 중 {n_failed}개는 실패했습니다.")
