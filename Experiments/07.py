@@ -1,4 +1,3 @@
-### Bout Type 별 크기 Distribution
 from util import *
 
 cur = os.path.splitext(os.path.basename(__file__))[0]
