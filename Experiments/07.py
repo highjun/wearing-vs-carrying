@@ -1,39 +1,68 @@
 from util import *
 
 cur = os.path.splitext(os.path.basename(__file__))[0]
+
 df = load_bout()
+users = getSortedUser(df)
+n_user = len(users)
 
-step_min = 0
-step_max = 1000
-bin_size = 50
-n_bin = (step_max-step_min)//bin_size
+nrows, ncols = 1, 2
+fig, ax = plt.subplots(nrows = nrows, ncols = ncols, figsize =(6.4*ncols, 4.8 * nrows))
 
-data = [[],[]]
-total = np.sum(df["step"])
-total_diff = np.sum(df.query("bout_type=='p'")["step"])+ np.sum(df.query("bout_type=='w'")["step"])
-for idx in range(n_bin):
-    x_min = idx*bin_size
-    x_max = (idx+1)*bin_size
-    bin_df = df.query(f"step>={idx*bin_size} and step< {(idx+1)*bin_size}")
-    data[0].append((np.sum(bin_df.query("bout_type=='p'")["step"])+ np.sum(bin_df.query("bout_type=='w'")["step"]))/total_diff)
-    data[1].append(np.sum(bin_df["step"])/total)
+weekday, weekend = getWeekendRatio(users, df)
+weekday = weekday.sort_index(level = 0, key=lambda x: [users.index(user) for user in x.to_numpy()])
+weekend = weekend.sort_index(level = 0, key=lambda x: [users.index(user) for user in x.to_numpy()])
 
-nrows= 1
-ncols = 2
-fig, ax = plt.subplots(nrows = nrows, ncols = ncols, figsize = (6.4*ncols, 4.8*nrows))
+for idx in range(ncols):
+    ax[idx].scatter(1-weekday['w' if idx == 0  else 'p'].to_numpy(), 1-weekend['w' if idx == 0  else 'p'].to_numpy(),s = 4)
+    ax[idx].set_xlabel('Weekday, ' + ('Phone' if idx == 0  else 'Watch'))
+    ax[idx].set_ylabel('Weekend')
+    ax[idx].set_xlim([0,1])
+    ax[idx].set_ylim([0,1])
 
-ax[0].bar(x = np.arange(n_bin), height = data[0], color = "tab:olive")
-ax[0].set_xticks(np.arange(-.5, n_bin))
-ax[0].set_xticklabels(np.arange(step_min, step_max+bin_size, bin_size), ha="right",rotation = 45, rotation_mode="anchor")
-ax[0].set_ylim([0,1])
-ax[0].set_xlabel("Percentage per Difference")
 
-ax[1].bar(x = np.arange(n_bin), height = data[1], color = "tab:olive")
-ax[1].set_xticks(np.arange(-.5, n_bin))
-ax[1].set_xticklabels(np.arange(step_min, step_max + bin_size, bin_size), ha="right",rotation = 45, rotation_mode="anchor")
-ax[1].set_ylim([0,1])
-ax[1].set_xlabel("Percentage per Total")
+# for idx,user in enumerate(users):
+#     user_df = df.query(f"users =='{user}'")
+#     bout_df = user_df.groupby(["date","bout_type"]).agg(step = ("step","sum")) 
+#     bout_df = bout_df.reindex(pd.MultiIndex.from_product([list(set(bout_df.index.get_level_values(0))), ['b','p','w']]),fill_value = 0)
+#     bout_df = bout_df.unstack(level=1)
+#     bout_df.columns = ['b','p','w']
+#     wear_ratio = (bout_df['w']+bout_df['b'])/(bout_df['p']+bout_df['b']+ bout_df['w']) 
+#     wearing_date = list(bout_df.index[wear_ratio >= 0.05])
+#     user_df = user_df.query(f"date in {wearing_date}")
+#     user_df = user_df.query(f"weekday < 5")
 
+#     night = user_df.query('hour > 18 or hour < 9')
+#     day = user_df.query('hour<=18 and hour >=9')
+
+#     night_w.append(np.sum(night.query("bout_type != 'p'")["step"])/np.sum(night["step"]))
+#     night_p.append(np.sum(night.query("bout_type != 'w'")["step"])/np.sum(night["step"]))
+#     day_w.append(np.sum(day.query("bout_type != 'p'")["step"])/np.sum(day["step"]))
+#     day_p.append(np.sum(day.query("bout_type != 'w'")["step"])/np.sum(day["step"]))
+
+# night_w = np.array(night_w)
+# night_p = np.array(night_p)
+# day_w = np.array(day_w)
+# day_p = np.array(day_p)
+# ax[0][0].scatter(day_w, night_w, s=4)
+# ax[0][1].scatter(night_p, night_w, s=4)
+# ax[1][0].scatter(day_w, day_p, s=4)
+# ax[1][1].scatter(night_p, day_p, s=4)
+# ax[0][0].set_ylabel("night watch")
+# ax[1][0].set_ylabel("day phone")
+# ax[1][0].set_xlabel("day watch")
+# ax[1][1].set_xlabel("night phone")
+
+# fig.supxlabel(f'''Scatter plot of Ratio
+
+# watch ratio was dropped for {np.sum( day_w - night_w >.1)}, and increased for {np.sum( day_w - night_w <-.1)}
+# phone ratio was dropped for {np.sum( day_p - night_p >.1)}, and increased for {np.sum( day_p - night_p <-.1)}
+# ''')
+
+# for ax_ in ax.flatten():
+#     ax_.set_xlim([0,1])
+#     ax_.set_ylim([0,1])
 
 plt.tight_layout()
 plt.savefig(os.path.join(os.getcwd(),"Figures", f"{cur}.png"))
+

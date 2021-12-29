@@ -1,9 +1,13 @@
 import glob
-import os
+import os, shutil
 import zipfile
 cwd = os.getcwd()
+
+shutil.rmtree(os.path.join(cwd, "Raws"))
+os.mkdir(os.path.join(cwd, "Raws"))
+
 for idx,name in enumerate(sorted(glob.glob(os.path.join(cwd, "Zips/*.zip")))):
     with zipfile.ZipFile(name, 'r') as zip_ref:
         file = os.path.splitext(os.path.basename(name))[0]
-        zip_ref.extractall(f"Raws/{file}")
+        zip_ref.extractall(os.path.join(cwd, f"Raws/{file}"))
         print(f"{file} zip is done")

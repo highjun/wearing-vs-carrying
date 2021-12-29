@@ -6,11 +6,9 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from dash.dependencies import Input, Output
 
-import glob
 import pandas as pd
 import datetime as dt
 import numpy as np
-import json
 import os
 
 app = dash.Dash(__name__)
