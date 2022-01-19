@@ -7,34 +7,21 @@ users = getSortedUser(df)
 n_user = len(users)
 
 nrows, ncols = 2, 1
-fig, ax = plt.subplots(nrows = nrows, ncols = ncols, figsize =(6.4*2.5*ncols, 4.8 * nrows))
+fig, ax = plt.subplots(nrows = nrows, ncols = ncols, figsize =(20, 8), sharey = True, sharex  =True)
 
-weekday, weekend = getWeekendRatio(users, df)
-weekday = weekday.sort_index(level = 0, key=lambda x: [users.index(user) for user in x.to_numpy()])
-weekend = weekend.sort_index(level = 0, key=lambda x: [users.index(user) for user in x.to_numpy()])
+datas = getWeekendRatio(users, df)
+datas = [data.sort_index(level = 0, key=lambda x: [users.index(user) for user in x.to_numpy()]) for data in datas]
 
-for idx, label in enumerate(["Phone","Watch"]):
-    ax[idx].bar(x= np.arange(n_user)*2.5+.5, height = 1-weekday['w' if idx == 0 else 'p'].to_numpy(), label = "weekday", color = "tab:olive")
-    ax[idx].bar(x= np.arange(n_user)*2.5+ 1.5, height = 1-weekend['w' if idx == 0 else 'p'].to_numpy(), label = "weekend", color = "tab:brown")
-    ax[idx].set_xlabel(label)
-    ax[idx].set_xlim([-1, n_user*2.5+1])
+color = {"weekday":"tab:olive", "weekend":"tab:brown"}
+for idx, btype in enumerate(["phone","watch"]):
+    for jdx, weekday in enumerate(["weekday","weekend"]):
+        ax[idx].bar(x=np.arange(n_user)*2.5 + .5 + jdx, height = datas[jdx][btype[0]].to_numpy() + datas[jdx]['b'].to_numpy(), label = weekday , color = color[weekday])
+    ax[idx].set_ylabel(f"{btype} covering Ratio")
     ax[idx].set_xticks(np.arange(n_user)*2.5+1)
-    ax[idx].set_xticklabels(['']*n_user)
-    # ax[idx].set_xticklabels(users, fontsize = 6, rotation= 45, ha="right", rotation_mode="anchor")
+    ax[idx].set_xticklabels(users, rotation= 90, ha = 'center')
 
-ax[0].legend()
-fig.supylabel("Covering Ratio")
-w_strong_end = np.sum((weekday['p'].to_numpy() - weekend['p'].to_numpy()) > .1)
-w_week_end = np.sum((weekday['p'].to_numpy() - weekend['p'].to_numpy()) < -.1)
-p_strong_end = np.sum((weekday['w'].to_numpy() - weekend['w'].to_numpy()) > .1)
-p_week_end = np.sum((weekday['w'].to_numpy() - weekend['w'].to_numpy()) < -.1)
-
-
-fig.supxlabel(f'''Covering Ratio Change
-Watch weekend > weekday: {w_strong_end}, opposite: {w_week_end}
-Phone weekend > weekday: {p_strong_end}, opposite: {p_week_end}
-''')
-
+ax[0].legend(loc='upper left', bbox_to_anchor=(1, 1))
+fig.supxlabel("User\n\nComparision of Covering Ratio between Weekend and Weekday")
 
 plt.tight_layout()
 plt.savefig(os.path.join(os.getcwd(),"Figures", f"{cur}.png"))
