@@ -7,7 +7,7 @@ import os
 simulate = False
 K = 30 #n_topic
 n_exp = 1
-if os.path.exists(f"lda_model_{n_exp}.pk"):
+if os.path.exists(f"lda_model_{n_exp}.pk") and simulate:
     print("Same number of experiment exists")
     exit()
 
@@ -76,9 +76,10 @@ LDA = LatentDirichletAllocation(n_components= K,
 if simulate:
     fit = LDA.fit(doc_vec)
     print("saving ...")
-    pickle.dump(fit, open(f"lda_model_{n_exp}.pk", 'wb'))
+    pickle.dump(fit, open(f"LDA/model_{n_exp}.pk", 'wb'))
 else:
-    LDA = pickle.load(open(f"lda_model_{n_exp}.pk", 'rb'))
+    print("loading...")
+    LDA = pickle.load(open(f"LDA/model_{n_exp}.pk", 'rb'))
 
 def cal_top_topics(transform):
     topics = np.zeros(K)
@@ -117,9 +118,6 @@ display_topics(transform, n_exp)
 #     tmp = distribution[topic]
 #     print(*[str(decomp_word(word))+": " + "{:.2f}".format(tmp[word]) for word in tmp.argsort()[::-1][:5]])
 #     print("-"*30+"\n")
-
-
-
 
 # print("Word Topic Distribution")
 # display_word_topic_distribution(LDA)
