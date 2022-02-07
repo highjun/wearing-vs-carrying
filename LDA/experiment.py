@@ -10,19 +10,23 @@ n_exp = 1
 if os.path.exists(f"lda_model_{n_exp}.pk") and simulate:
     print("Same number of experiment exists")
     exit()
-
+log = open(f"LDA/result_{n_exp}.out","w")
 df = load_bout()
 # Active Level of Hourly Step Count
 df['30min'] = df['first'].dt.hour + (df['first'].dt.minute//30)/2
-hourly = df.groupby(["uid","date","30min"]).agg(step = ('step','sum'), pstep = ('pstep','sum'), wstep = ('wstep','sum'))
-levels = np.percentile(hourly.query('step!=0')['step'], [0,33,66])
-print("Levels: ", levels)
+hourly = df.groupby(["uid","date","30min", "btype"]).agg(step = ('step','sum'))
+hourly = hourly.unstack(level = 3,fill_value = 0)
+hourly.columns = ['b','p','w']
+hourly['diff'] = hourly['p'].to_numpy() - hourly['w'].to_numpy()
+
+levels = np.percentile(hourly['diff'], [25, 50, 75])
+print("Levels: ", levels, file = log)
 def get_active_level(step):
-    if step == levels[0]:
+    if step <= levels[0]:
         return 0
-    elif step < levels[1]:
+    elif step <= levels[1]:
         return 1
-    elif step < levels[2]:
+    elif step <= levels[2]:
         return 2
     else:
         return 3
@@ -56,7 +60,7 @@ def decomp_word(word):
     ar[3] = word
     return ar
 
-hourly['level'] = [get_active_level(val) for val in hourly['step'].to_numpy()]
+hourly['level'] = [get_active_level(val) for val in hourly['diff'].to_numpy()]
 hourly = hourly[['level']].unstack(level = 2, fill_value = 0)
 doc_vec = np.zeros((hourly.shape[0], 4*4*4*8))
 for doc_idx in range(hourly.shape[0]):
@@ -75,19 +79,19 @@ LDA = LatentDirichletAllocation(n_components= K,
                                 random_state=0,) #doc_topic_prior= 50 / 30, topic_word_prior= .01)
 if simulate:
     fit = LDA.fit(doc_vec)
-    print("saving ...")
+    print("saving ...", file = log)
     pickle.dump(fit, open(f"LDA/model_{n_exp}.pk", 'wb'))
 else:
-    print("loading...")
+    print("loading...",file = log)
     LDA = pickle.load(open(f"LDA/model_{n_exp}.pk", 'rb'))
 
 def cal_top_topics(transform):
-    topics = np.zeros(K)
-    for idx in range(doc_vec.shape[0]):
-        day = transform[idx]
-        top3 = day.argsort()[::-1][:3]
-    for topic in top3:
-        topics[topic] += 1
+    topics = transform.sum(axis = 0)
+    # for idx in range(doc_vec.shape[0]):
+    #     day = transform[idx]
+    #     top3 = day.argsort()[::-1][:3]
+    # for topic in top3:
+    #     topics[topic] += 1
     return topics
 
 def display_topics(transform, n_exp, n_toptopic = 12):
@@ -105,12 +109,34 @@ def display_topics(transform, n_exp, n_toptopic = 12):
         ax.set_xticks(np.arange(0,48+12, 12))
         ax.set_xticklabels(np.arange(0,24+6, 6))
         ax.pcolor(colors, cmap = "Reds")
-    plt.savefig(f"topic_{n_exp}.png")
+    plt.savefig(f"LDA/topic_{n_exp}.png")
     plt.close()
+
+def display_topic_word_distribution(model, transform):
+    top_topics= cal_top_topics(transform).argsort()[:-12:-1]
+    distribution = model.components_ / model.components_.sum(axis=1)[:,np.newaxis]
+    for topic in top_topics:
+        print('Topic #', topic, file = log)
+        tmp = distribution[topic]
+        print(*[str(idx).zfill(3) + " " for idx in tmp.argsort()[::-1][:10]], file = log)
+        tmp.sort()
+        print(*["{:.2f}".format(prob) for prob in tmp[::-1][:10]], file = log)
+        print("", file = log)
+        print("-"*30, file = log)
+
+def display_doc_topic_distribution(transform):
+    top_topics= cal_top_topics(transform).argsort()[:-12:-1]
+    for topic in top_topics:
+        docs =transform[:,topic].argsort()[:-50:-1]
+        print('Topic #', topic, file = log)
+        for doc in docs:
+            print(f"Doc: {hourly.index[doc]}, Topic Prob: {round(transform[doc,topic],3)}",file = log)
+        print("-"*30, file = log)
 
 transform = LDA.transform(doc_vec)
 display_topics(transform, n_exp)
-
+display_doc_topic_distribution(transform)
+log.close()
 
 # distribution = LDA.components_ / LDA.components_.sum(axis=1)[:,np.newaxis]
 # for topic in toptopics:
@@ -155,16 +181,6 @@ display_topics(transform, n_exp)
 #         print('Word #', list(decomp_word(word)))
 #         tmp = distribution[:,word]
 #         print(*[str(idx).zfill(2) + "  " for idx in tmp.argsort()[::-1][:10]])
-#         tmp.sort()
-#         print(*["{:.2f}".format(prob) for prob in tmp[::-1][:10]])
-#         print("")
-#         print("-"*30)
-# def display_topic_word_distribution(model):
-#     distribution = model.components_ / model.components_.sum(axis=1)[:,np.newaxis]
-#     for compidx in range(K):
-#         print('Topic #', compidx)
-#         tmp = distribution[compidx]
-#         print(*[str(idx).zfill(3) + " " for idx in tmp.argsort()[::-1][:10]])
 #         tmp.sort()
 #         print(*["{:.2f}".format(prob) for prob in tmp[::-1][:10]])
 #         print("")
