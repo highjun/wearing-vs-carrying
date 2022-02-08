@@ -4,6 +4,7 @@ from scipy.sparse import csr_matrix
 import pickle
 import os
 
+# Experiment 3,4 비교
 simulate = False
 K = 30 #n_topic
 n_exp = 3
@@ -159,51 +160,3 @@ transform = LDA.transform(doc_vec)
 display_topics(transform, n_exp)
 display_doc_topic_distribution(transform)
 log.close()
-
-# distribution = LDA.components_ / LDA.components_.sum(axis=1)[:,np.newaxis]
-# for topic in toptopics:
-#     print('Topic #', topic)
-#     tmp = distribution[topic]
-#     print(*[str(decomp_word(word))+": " + "{:.2f}".format(tmp[word]) for word in tmp.argsort()[::-1][:5]])
-#     print("-"*30+"\n")
-
-# print("Word Topic Distribution")
-# display_word_topic_distribution(LDA)
-# print("Topic Word Distribution")
-# display_topic_word_distribution(LDA)
-# print("Transform")
-# print(LDA.score(doc_vec))
-# print(LDA.perplexity(doc_vec))
-# print("-"*30)
-# transform = LDA.transform(doc_vec)
-# for idx in range(doc_vec.shape[0]):
-#     print(f"Index: ", hourly.index[idx])
-#     day = transform[idx]
-#     top3 = day.argsort()[::-1][:3]
-#     print("Top3 topics: ", top3)
-#     for topic in top3:
-#         print(topic,":",day[topic])
-#     # print("Prob", day)
-#     # print("Dominated Topics: ", np.argwhere(day > .5).reshape(-1).tolist())
-#     print("--------------------")
-# print("Most Occured Topics")
-# topics = np.zeros(K)
-# for idx in range(doc_vec.shape[0]):
-#     day = transform[idx]
-#     top3 = day.argsort()[::-1][:3]
-#     for topic in top3:
-#         topics[topic] += 1
-# print(*[str(idx).zfill(2)+ " "*2 for idx in topics.argsort()[::-1][:15]])
-# topics.sort()
-# print(*[str(int(topic)).zfill(4) for topic in topics[::-1][:15]])
-# then reload it with
-# def display_word_topic_distribution(model):
-#     distribution = model.components_ / model.components_.sum(axis=0)[np.newaxis,:]
-#     for word in range(4*4*4*8):
-#         print('Word #', list(decomp_word(word)))
-#         tmp = distribution[:,word]
-#         print(*[str(idx).zfill(2) + "  " for idx in tmp.argsort()[::-1][:10]])
-#         tmp.sort()
-#         print(*["{:.2f}".format(prob) for prob in tmp[::-1][:10]])
-#         print("")
-#         print("-"*30)

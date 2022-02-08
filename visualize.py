@@ -15,14 +15,15 @@ app = dash.Dash(__name__)
 cwd = os.getcwd()
 data_path = os.path.join(cwd,"Data","integrated.csv")
 user_dir  =os.path.join(cwd,"Data","Users")
+users = sorted([os.path.splitext(file)[0]  for file in os.listdir(user_dir)])
 # df = pd.read_csv(data_path,header = 0, index_col= 0)
 # df["timestamp"] = pd.to_datetime(df["timestamp"])
 
 users = sorted([file.split(".csv")[0] for file in os.listdir(user_dir)])
 
-def getPlotlyGraph(user):
+def getPlotlyGraph(uid):
     # user_df = df.query(f"users == '{user}'")
-    user_df = pd.read_csv(os.path.join(user_dir, f"{user}.csv"), header = 0, index_col= 0)
+    user_df = pd.read_csv(os.path.join(user_dir, f"{users[uid]}.csv"), header = 0, index_col= 0)
     user_df["timestamp"] = pd.to_datetime(user_df["timestamp"])
     user_df["weekday"] = user_df["timestamp"].dt.weekday
 
@@ -65,8 +66,8 @@ def getPlotlyGraph(user):
 app.layout = html.Div(children=[
     dcc.Dropdown(
         id='input_name',
-        options= [{'label': i, 'value':i} for i in users],
-        value = '1004jeje',
+        options= [{'label': i, 'value':i} for i in range(len(users))],
+        value = '0',
     ),
     dcc.Graph(
         id = 'graph',

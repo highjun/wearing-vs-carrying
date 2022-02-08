@@ -4,54 +4,56 @@ from scipy.sparse import csr_matrix
 import pickle
 import os
 
-simulate = False
-K = 30 #n_topic
-n_exp = 3
-if os.path.exists(f"lda_model_{n_exp}.pk") and not simulate:
+simulate = True
+K = 15 #n_topic
+
+n_exp = 9
+if os.path.exists(f"LDA/model_{n_exp}.pk") and simulate:
     print("Same number of experiment exists")
     exit()
 log = open(f"LDA/result_{n_exp}.out","w")
 df = load_bout()
 # Active Level of Hourly Step Count
 df['30min'] = df['first'].dt.hour + (df['first'].dt.minute//30)/2
-if n_exp ==1:
-    hourly = df.groupby(["uid","date","30min"]).agg(step = ('step','sum'))
-    hourly['data'] = hourly['step'].to_numpy()
-    levels = np.percentile(hourly['step'],[0,33,66])
-elif n_exp == 2:
-    hourly = df.groupby(["uid","date","30min", "btype"]).agg(step = ('step','sum'))
-    hourly = hourly.unstack(level = 3,fill_value = 0)
-    hourly.columns = ['b','p','w']
-    hourly['diff'] = hourly['p'].to_numpy() - hourly['w'].to_numpy()
-    hourly['data'] = hourly['diff'].to_numpy()
-    levels = np.percentile(hourly['diff'], [25, 50, 75])
-elif n_exp == 3:
-    hourly = df.groupby(["uid","date","30min", "btype"]).agg(step = ('step','sum'))
-    hourly = hourly.unstack(level = 3,fill_value = 0)
-    hourly.columns = ['b','p','w']
-    hourly['data'] = hourly['p'].to_numpy()
-    # hourly['data'] = hourly['diff'].to_numpy()
-    levels = np.percentile(hourly.query('p!=0')['p'], [0, 33, 66]) # 0만 제거
-elif n_exp == 4:
-    hourly = df.groupby(["uid","date","30min", "btype"]).agg(step = ('step','sum'))
-    hourly = hourly.unstack(level = 3,fill_value = 0)
-    hourly.columns = ['b','p','w']
-    hourly['data'] = hourly['w'].to_numpy()
-    # hourly['data'] = hourly['diff'].to_numpy()
-    levels = np.percentile(hourly.query('w!=0')['w'], [0, 33, 66]) # 0만 제거
-else:
-    pass
-print("Levels: ", levels, file = log, flush = True)
-def get_active_level(step):
-    if step <= levels[0]:
-        return 0
-    elif step <= levels[1]:
-        return 1
-    elif step <= levels[2]:
-        return 2
-    else:
-        return 3
 
+hourly = df.groupby(["uid","date","30min"]).agg(step = ('step','sum'))
+hourly['data'] = hourly['step'].to_numpy()
+levels = np.percentile(hourly['step'],[0,33])
+
+hourly = df.groupby(["uid","date","30min", "btype"]).agg(step = ('step','sum'))
+hourly = hourly.unstack(level = 3,fill_value = 0)
+print(hourly.columns, flush = True)
+hourly.columns = ['b','p','w']
+
+print("Levels: ", levels, file = log, flush = True)
+if n_exp ==6:
+    n_level =4
+    def get_active_level(p,w):
+        if p == 0 and w == 0:
+            return 0 
+        elif p!= 0 and w == 0:
+            return 1
+        elif w!= 0 and p == 0:
+            return 2
+        else:
+            return 3
+elif n_exp >= 7:
+    n_level = 6
+    def get_active_level(p,w):
+        if p == 0 and w == 0:
+            return 0 
+        elif p!= 0 and w == 0:
+            if p <= levels[1]:
+                return 1
+            else:
+                return 2
+        elif w!= 0 and p == 0:
+            if w <= levels[1]:
+                return 3
+            else:
+                return 4
+        else:
+            return 5
 def get_coarse_level(time):
     if time < 7: 
         return 0
@@ -72,29 +74,29 @@ def get_coarse_level(time):
 
 def decomp_word(word):
     ar = np.zeros(4)
-    ar[0] = word//(4*4*8)
-    word %= 4*4*8
-    ar[1] = word//(4*8)
-    word %= 4*8
+    ar[0] = word//(n_level*n_level*8)
+    word %= n_level*n_level*8
+    ar[1] = word//(n_level*8)
+    word %= n_level*8
     ar[2] = word//8
     word %= 8
     ar[3] = word
     return ar
 
-hourly['level'] = [get_active_level(val) for val in hourly['data'].to_numpy()]
+hourly['level'] = [get_active_level(p,w) for p,w in hourly[['p','w']].to_numpy()]
 hourly = hourly[['level']].unstack(level = 2, fill_value = 0)
-doc_vec = np.zeros((hourly.shape[0], 4*4*4*8))
+doc_vec = np.zeros((hourly.shape[0], n_level*n_level*n_level*8))
 for doc_idx in range(hourly.shape[0]):
     day = hourly.iloc[doc_idx]
     for idx in np.arange(1, 47):
         coarse = get_coarse_level(idx/2)
         word = [*day[idx-1:idx+2], coarse]
-        word_idx = word[0]*4*4*8 + word[1]*4*8 + word[2]*8 + word[3]
+        word_idx = word[0]*n_level*n_level*8 + word[1]*n_level*8 + word[2]*8 + word[3]
         doc_vec[doc_idx, word_idx] += 1
 
 doc_vec = csr_matrix(doc_vec)
 LDA = LatentDirichletAllocation(n_components= K, 
-                                max_iter = 1000,
+                                max_iter = 150,
                                 learning_method="online",
                                 learning_offset=50.0,
                                 random_state=0,) #doc_topic_prior= 50 / 30, topic_word_prior= .01)
@@ -129,7 +131,16 @@ def display_topics(transform, n_exp, n_toptopic = 12):
         ax.set_xlabel(f"Topic: {topic}")
         ax.set_xticks(np.arange(0,48+12, 12))
         ax.set_xticklabels(np.arange(0,24+6, 6))
-        ax.pcolor(colors, cmap = "Reds")
+        from matplotlib.colors import LinearSegmentedColormap
+        if n_exp == 6:
+            import matplotlib.colors as mcolors
+            clist = [mcolors.hex2color(hex) for hex in ['#ffffff','#1f77b4',  '#ff7f0e', '#2ca02c']]
+            cmap = LinearSegmentedColormap.from_list('mycmap', clist, N = 4)
+        elif n_exp >= 7:
+            import matplotlib.colors as mcolors
+            clist = [mcolors.hex2color(hex) for hex in ['#ffffff','#1f77b4', '#0f3957', '#ff7f0e', '#cc5f00' ,'#2ca02c']]
+            cmap = LinearSegmentedColormap.from_list('mycmap', clist, N = n_level)
+        ax.pcolor(colors, cmap = cmap, vmin = 0, vmax = n_level-1)
     plt.savefig(f"LDA/topic_{n_exp}.png")
     plt.close()
 
@@ -152,8 +163,8 @@ def display_doc_topic_distribution(transform):
         print('Topic #', topic, file = log)
         for doc in docs:
             print(f"Doc: {hourly.index[doc]}, Topic Prob: {round(transform[doc,topic],3)}",file = log)
+            print(list(hourly.iloc[doc]['level'].to_numpy()), file = log)
         print("-"*30, file = log)
-    
 
 transform = LDA.transform(doc_vec)
 display_topics(transform, n_exp)
