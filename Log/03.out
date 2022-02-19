@@ -1,0 +1,24 @@
+Correlation between duration and step for
+both: 0.956
+phone: 0.958
+watch: 0.925
+Correlation between distance and step for
+both: 0.995
+phone: 0.998
+watch: 0.996
+Correlation between calorie and step for
+both: 0.956
+phone: 0.982
+watch: 0.963
+Correlation between speed and step for
+both: 0.186
+phone: 0.049
+watch: 0.067
+Correlation between run and step for
+both: 0.427
+phone: 0.221
+watch: 0.829
+Correlation between walk and step for
+both: 0.969
+phone: 0.997
+watch: 0.924

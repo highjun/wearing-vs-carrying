@@ -1,0 +1,10 @@
+Total Difference 중의 Phone의 비율과 Watch의 비율: 
+Phone: 39.3% , Watch: 29.8%, Both: 30.9%
+--------------------
+Correlation: 0.826
+paired t-test: T=7.9342658515438655, p=0.000
+
+---------------
+For both detected bout
+Correlation: 0.950
+paired t-test: T=0.05215591923969188, p=0.958

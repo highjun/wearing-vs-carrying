@@ -1,0 +1,213 @@
+P01 Series([], Name: run, dtype: int64)
+P01 preprocessed
+P02 Series([], Name: run, dtype: int64)
+P02 preprocessed
+P03 Series([], Name: run, dtype: int64)
+P03 preprocessed
+P04 Series([], Name: run, dtype: int64)
+P04 preprocessed
+P05 Series([], Name: run, dtype: int64)
+P05 preprocessed
+P06 Series([], Name: run, dtype: int64)
+P06 preprocessed
+P07 Series([], Name: run, dtype: int64)
+P07 preprocessed
+P08 Series([], Name: run, dtype: int64)
+P08 preprocessed
+P10 Series([], Name: run, dtype: int64)
+P10 preprocessed
+P12 Series([], Name: run, dtype: int64)
+P12 preprocessed
+P13 Series([], Name: run, dtype: int64)
+P13 preprocessed
+P14 Series([], Name: run, dtype: int64)
+P14 preprocessed
+P15 Series([], Name: run, dtype: int64)
+P15 preprocessed
+P16 Series([], Name: run, dtype: int64)
+P16 preprocessed
+P17 Series([], Name: run, dtype: int64)
+P17 preprocessed
+P18 Series([], Name: run, dtype: int64)
+P18 preprocessed
+P19 Series([], Name: run, dtype: int64)
+P19 preprocessed
+P20 Series([], Name: run, dtype: int64)
+P20 preprocessed
+P21 Series([], Name: run, dtype: int64)
+P21 preprocessed
+P22 Series([], Name: run, dtype: int64)
+P22 preprocessed
+P23 Series([], Name: run, dtype: int64)
+P23 preprocessed
+P24 Series([], Name: run, dtype: int64)
+P24 preprocessed
+P25 Series([], Name: speed, dtype: int64)
+P25 preprocessed
+P26 Series([], Name: run, dtype: int64)
+P26 preprocessed
+P27 Series([], Name: run, dtype: int64)
+P27 preprocessed
+P28 Series([], Name: run, dtype: int64)
+P28 preprocessed
+P29 Series([], Name: run, dtype: int64)
+P29 preprocessed
+P30 Series([], Name: run, dtype: int64)
+P30 preprocessed
+P31 Series([], Name: run, dtype: int64)
+P31 preprocessed
+P32 Series([], Name: speed, dtype: int64)
+P32 preprocessed
+P33 Series([], Name: run, dtype: int64)
+P33 preprocessed
+P34 Series([], Name: run, dtype: int64)
+P34 preprocessed
+P35 Series([], Name: run, dtype: int64)
+P35 preprocessed
+P36 Series([], Name: run, dtype: int64)
+P36 preprocessed
+P37 Series([], Name: run, dtype: int64)
+P37 preprocessed
+P38 Series([], Name: run, dtype: int64)
+P38 preprocessed
+P39 Series([], Name: run, dtype: int64)
+P39 preprocessed
+P40 Series([], Name: run, dtype: int64)
+P40 preprocessed
+P41 Series([], Name: run, dtype: int64)
+P41 preprocessed
+P42 Series([], Name: run, dtype: int64)
+P42 preprocessed
+P43 Series([], Name: run, dtype: int64)
+P43 preprocessed
+P44 Series([], Name: run, dtype: int64)
+P44 preprocessed
+P45 Series([], Name: run, dtype: int64)
+P45 preprocessed
+P46 Series([], Name: run, dtype: int64)
+P46 preprocessed
+P47 Series([], Name: run, dtype: int64)
+P47 preprocessed
+P48 Series([], Name: run, dtype: int64)
+P48 preprocessed
+P49 Series([], Name: run, dtype: int64)
+P49 preprocessed
+P50 Series([], Name: run, dtype: int64)
+P50 preprocessed
+P51 Series([], Name: run, dtype: int64)
+P51 preprocessed
+Error in P52: No Step count folder exist
+P53 Series([], Name: run, dtype: int64)
+P53 preprocessed
+P54 Series([], Name: run, dtype: int64)
+P54 preprocessed
+P55 Series([], Name: run, dtype: int64)
+P55 preprocessed
+P56 Series([], Name: run, dtype: int64)
+P56 preprocessed
+P57 Series([], Name: run, dtype: int64)
+P57 preprocessed
+P58 Series([], Name: run, dtype: int64)
+P58 preprocessed
+P59 Series([], Name: run, dtype: int64)
+P59 preprocessed
+P60 timestamp            device  uuid      
+2021-08-03 20:56:00  phone   cD3rdwdaHh    3
+2021-08-05 23:49:00  phone   cD3rdwdaHh    2
+2021-08-17 20:25:00  phone   cD3rdwdaHh    3
+Name: run, dtype: int64
+P60 preprocessed
+P61 Series([], Name: run, dtype: int64)
+P61 preprocessed
+P62 Series([], Name: run, dtype: int64)
+P62 preprocessed
+P63 Series([], Name: run, dtype: int64)
+P63 preprocessed
+P64 Series([], Name: run, dtype: int64)
+P64 preprocessed
+P65 Series([], Name: run, dtype: int64)
+P65 preprocessed
+P66 Series([], Name: run, dtype: int64)
+P66 preprocessed
+P67 Series([], Name: run, dtype: int64)
+P67 preprocessed
+P68 Series([], Name: run, dtype: int64)
+P68 preprocessed
+P69 Series([], Name: run, dtype: int64)
+P69 preprocessed
+P70 Series([], Name: run, dtype: int64)
+P70 preprocessed
+P71 Series([], Name: run, dtype: int64)
+P71 preprocessed
+P72 Series([], Name: run, dtype: int64)
+P72 preprocessed
+P73 Series([], Name: run, dtype: int64)
+P73 preprocessed
+P74 Series([], Name: run, dtype: int64)
+P74 preprocessed
+P75 Series([], Name: run, dtype: int64)
+P75 preprocessed
+P76 Series([], Name: run, dtype: int64)
+P76 preprocessed
+P77 Series([], Name: run, dtype: int64)
+P77 preprocessed
+P78 Series([], Name: run, dtype: int64)
+P78 preprocessed
+P79 Series([], Name: run, dtype: int64)
+P79 preprocessed
+P80 timestamp            device  uuid      
+2021-08-07 08:12:00  phone   VIHvwnWQtu    2
+2021-08-07 08:30:00  phone   VIHvwnWQtu    2
+2021-08-07 08:41:00  phone   VIHvwnWQtu    3
+2021-08-07 08:42:00  phone   VIHvwnWQtu    2
+2021-08-07 08:43:00  phone   VIHvwnWQtu    2
+2021-08-07 08:44:00  phone   VIHvwnWQtu    4
+2021-08-07 08:45:00  phone   VIHvwnWQtu    4
+2021-08-07 08:46:00  phone   VIHvwnWQtu    5
+2021-08-07 08:47:00  phone   VIHvwnWQtu    3
+2021-08-07 08:48:00  phone   VIHvwnWQtu    2
+Name: run, dtype: int64
+P80 preprocessed
+P81 Series([], Name: run, dtype: int64)
+P81 preprocessed
+P82 Series([], Name: run, dtype: int64)
+P82 preprocessed
+P84 Series([], Name: run, dtype: int64)
+P84 preprocessed
+P85 Series([], Name: run, dtype: int64)
+P85 preprocessed
+P86 Series([], Name: run, dtype: int64)
+P86 preprocessed
+P87 Series([], Name: run, dtype: int64)
+P87 preprocessed
+P88 Series([], Name: run, dtype: int64)
+P88 preprocessed
+P89 Series([], Name: run, dtype: int64)
+P89 preprocessed
+P90 Series([], Name: run, dtype: int64)
+P90 preprocessed
+P91 Series([], Name: run, dtype: int64)
+P91 preprocessed
+P92 Series([], Name: run, dtype: int64)
+P92 preprocessed
+P93 timestamp            device  uuid      
+2021-06-27 18:48:00  phone   LMmlSTiFJL    2
+2021-06-27 18:49:00  phone   LMmlSTiFJL    2
+2021-06-29 19:37:00  phone   LMmlSTiFJL    2
+2021-06-30 18:53:00  phone   LMmlSTiFJL    2
+Name: run, dtype: int64
+P93 preprocessed
+P94 Series([], Name: run, dtype: int64)
+P94 preprocessed
+P95 Series([], Name: run, dtype: int64)
+P95 preprocessed
+P96 Series([], Name: run, dtype: int64)
+P96 preprocessed
+P97 timestamp            device  uuid      
+2021-07-25 19:56:00  phone   cw9sRjnYT4    2
+Name: run, dtype: int64
+P97 preprocessed
+P98 Series([], Name: run, dtype: int64)
+P98 preprocessed
+P99 Series([], Name: run, dtype: int64)
+P99 preprocessed

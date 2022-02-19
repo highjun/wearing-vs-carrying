@@ -1,85 +1,78 @@
-# Step per min Visualization for 1 Participants
+# Visualization of Step Count Raw Data along with time
 import dash
 from dash import dcc
 from dash import  html
+from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from dash.dependencies import Input, Output
 
-import pandas as pd
-import datetime as dt
-import numpy as np
 import os
+import pandas as pd
+from util import color
 
 app = dash.Dash(__name__)
 cwd = os.getcwd()
-data_path = os.path.join(cwd,"Data","integrated.csv")
-user_dir  =os.path.join(cwd,"Data","Users")
-users = sorted([os.path.splitext(file)[0]  for file in os.listdir(user_dir)])
-# df = pd.read_csv(data_path,header = 0, index_col= 0)
-# df["timestamp"] = pd.to_datetime(df["timestamp"])
-
+user_dir  =os.path.join(cwd,"Data_")
 users = sorted([file.split(".csv")[0] for file in os.listdir(user_dir)])
 
-def getPlotlyGraph(uid):
-    # user_df = df.query(f"users == '{user}'")
-    user_df = pd.read_csv(os.path.join(user_dir, f"{users[uid]}.csv"), header = 0, index_col= 0)
-    user_df["timestamp"] = pd.to_datetime(user_df["timestamp"])
-    user_df["weekday"] = user_df["timestamp"].dt.weekday
+color = {'phone': '#1f77b4', 'watch':'#ff7f0e'}
+def getPlotlyGraph(uid,date):
+    udf = pd.read_csv(os.path.join(user_dir, f"{uid}.csv"), header = 0, index_col= 0)
+    udf["timestamp"] = pd.to_datetime(udf["timestamp"])
+    udf["weekday"] = udf["timestamp"].dt.weekday
+    date  = dt.datetime.strptime(date, '%Y-%m-%d').date()
+    start = udf.iloc[0]['timestamp'].date()
+    end = udf.iloc[-1]['timestamp'].date()
+    if date < start:
+        date = start
+    elif date > end:
+        date = end
+    plots = make_subplots(rows=2, cols=1, specs=[[{}], [{}]], 
+                        shared_xaxes=True, shared_yaxes=True, 
+                        horizontal_spacing=0, vertical_spacing=0)
+    for idx, device in enumerate(['phone','watch']):
+        tmp = udf.query("device == @device")
+        hovertemplate = []
+        columns = ['step', 'weekday', 'timestamp', 'speed','distance','calorie']
+        for row in tmp[columns].to_numpy():
+            desc = ''
+            for cdx, column in enumerate(columns):
+                desc += f'{column}: {row[cdx]}<br>\n'
+            hovertemplate.append(desc)
+        plots.append_trace(
+            go.Bar(x=tmp["timestamp"], y= tmp["step"] , orientation='v', showlegend=True, hovertemplate = hovertemplate, name=device,  marker=dict(color= color[device])),
+            idx+1, 1)
+    plots.update_yaxes(fixedrange = True,range = [0,200], row=1,col= 1)
+    plots.update_yaxes(fixedrange = True,range = [-200,0], row=2,col= 1)
+    plots.update_xaxes(range= [date, date + dt.timedelta(days = 1)])
+    return plots, date
 
-    date = user_df.iloc[0]["timestamp"].date()
-    watch_step = user_df.query("device == 'watch'")
-    phone_step = user_df.query("device == 'phone'")
-
-    overall = make_subplots(rows=2, cols=1, specs=[[{}], [{}]], shared_xaxes=True, shared_yaxes=True, horizontal_spacing=0, vertical_spacing=0)
-    hovertemplate = []
-    for _, row in phone_step.iterrows():
-        hovertemplate.append(f'''
-        weekday: {row["weekday"]}<br>
-        Time: {row['timestamp']}<br>
-        Step: {row['step']} <br>
-        Speed: {row['speed']} <br>
-        Distance: {row['distance']} <br>
-        Calorie: {row['calorie']}
-        ''')
-    overall.append_trace(go.Bar(x=phone_step["timestamp"], y= phone_step["step"] , orientation='v', showlegend=True, hovertemplate = hovertemplate, name="phone",  marker=dict(
-        color='#1f77b4',
-    )), 1, 1)
-    hovertemplate = []
-    for _, row in watch_step.iterrows():
-        hovertemplate.append(f'''
-        weekday: {row["weekday"]}<br>
-        Time: {row['timestamp']} <br>
-        Step: {row['step']} <br>
-        Speed: {row['speed']} <br>
-        Distance: {row['distance']} <br>
-        Calorie: {row['calorie']}
-        ''')
-    overall.append_trace(go.Bar(x=watch_step["timestamp"], y=-1* np.array(watch_step["step"]), orientation='v', showlegend=True, hovertemplate = hovertemplate, name="watch",  marker=dict(
-        color='#ff7f0e',
-    )), 2, 1)
-    overall.update_yaxes(fixedrange = True,range = [0,150], row=1,col= 1)
-    overall.update_yaxes(fixedrange = True,range = [-150,0], row=2,col= 1)
-    overall.update_xaxes(range= [date, date + dt.timedelta(days = 1)])
-    return overall
-
-app.layout = html.Div(children=[
+app.layout = html.Span(children=[
     dcc.Dropdown(
-        id='input_name',
-        options= [{'label': i, 'value':i} for i in range(len(users))],
-        value = '0',
+        id='uid',
+        options= [{'label': i, 'value':i} for i in users],
+        value = 'P00',
+    ),
+    dcc.DatePickerSingle(
+        id='date',
+        min_date_allowed=dt.date(2021, 1, 1),
+        max_date_allowed=dt.date(2022, 6, 1),
+        initial_visible_month=dt.date(2000, 1, 1),
+        date=dt.date(2000,1,1)
     ),
     dcc.Graph(
         id = 'graph',
     )
 ])
 @app.callback(
-    Output("graph", "figure"),
-    Input("input_name", "value"),
+    [Output("graph", "figure"),
+    Output('date','date')],
+    Input("uid", "value"),
+    Input('date', 'date')
 )
-def cb_render(input_name):
-    graph = getPlotlyGraph(input_name)
-    return graph
+def cb_render(uid, date):
+    graph,date = getPlotlyGraph(uid,date)
+    return graph, date
 
 if __name__ == '__main__':
-    app.run_server(debug=True) 
+    app.run_server(debug=False)

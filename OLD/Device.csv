@@ -1,0 +1,218 @@
+uid,device_group,device_name,deviceuuid
+P01,wearable,Gear Fit2,QqkhY6dEVQ
+P01,wearable,Gear S3,1vTRFAg9K/
+P01,smartphone,SM-G973N,192JILvwU5
+P01,smartphone,ZTE-V9VITA,gQY3quxyYo
+P02,smartphone,SM-G991N,KnuGdWBX+i
+P02,smartphone,SM-G965N,3VDYxdUcZN
+P02,wearable,Galaxy Watch,F/ziIyZ5WQ
+P03,smartphone,SM-A716S,pWXebulfA1
+P03,wearable,Galaxy Watch4,7VZ0JIy3qr
+P03,smartphone,SM-T733,45EXTzEHGP
+P04,smartphone,SM-N986N,Bnw0HMQytG
+P04,wearable,Galaxy Watch,p2FY5OOHQZ
+P04,smartphone,SM-N976N,I58GzujEZY
+P05,smartphone,SM-N986N,75hpJIeXeQ
+P05,wearable,Gear Fit2,hqwNIeyDwH
+P05,wearable,Galaxy Watch4,qfKMHBW3i9
+P06,smartphone,SM-N986N,neHA12BZrW
+P06,wearable,Galaxy Fit2,0rbJQajGFM
+P07,smartphone,SM-F711N,ObGwGYoUff
+P07,smartphone,SM-N976N,3YnTJXGaCZ
+P07,wearable,Gear S3,NegErdYdgg
+P08,smartphone,SM-N971N,ROQme73op8
+P08,wearable,Galaxy Fit2,yfw4CH5TGJ
+P08,wearable,Galaxy Watch4,UCqVBPiM+1
+P10,smartphone,SM-N971N,/g+8iWp2oU
+P10,wearable,Galaxy Watch4,aGdvdKN03t
+P12,smartphone,SM-N976N,2EO044cO0Z
+P12,wearable,Galaxy Watch4 Classic,p8HgOD5fkL
+P12,wearable,Galaxy Watch4 Classic,HmTEpu3zfV
+P13,smartphone,SM-N986N,yvnLQpR7nw
+P13,wearable,Galaxy Watch3,LguJEK3j13
+P14,smartphone,SM-G991N,/LC9lOpk6Y
+P14,smartphone,SM-G887N,JEF1fxTUK0
+P14,wearable,Galaxy Watch Active2,Lkfs1yie6S
+P15,smartphone,SM-G887N,JEF1fxTUK0
+P15,wearable,Galaxy Watch Active2,Lkfs1yie6S
+P16,smartphone,SM-G977N,5tadVpM7W0
+P16,wearable,Galaxy Fit2,POl12gmXOR
+P17,smartphone,SM-N986N,sRwJ6hSvcm
+P17,wearable,Galaxy Watch,oLRU1+0EDZ
+P18,smartphone,SM-G975F,uh1ubYKoB9
+P19,smartphone,SM-G998N,DIMwWxASW7
+P19,wearable,Galaxy Watch4,XVxNQ/eDPG
+P20,smartphone,SM-G973N,rXrn9aXocZ
+P21,smartphone,SM-G975N,iFRqmL+Cl4
+P21,wearable,Galaxy Watch,iWQFQbCoW5
+P22,smartphone,SM-G986N,D/c1KsOvpx
+P22,wearable,Galaxy Watch Active2,UmWC6N5uHD
+P23,smartphone,SM-N976N,ylwaFgjh59
+P23,wearable,Galaxy Watch Active2,JSx5mPAfRC
+P24,smartphone,SM-G991N,7psvO1ePwO
+P24,wearable,Galaxy Watch4,Z5ZWt/TEce
+P25,smartphone,iPhone 6,5BoAfJSb8J
+P25,wearable,Galaxy Fit2,J7p82ao6Du
+P26,smartphone,SM-F907N,lzX3k0xk/g
+P26,wearable,Galaxy Watch4 Classic,ceS2uOB946
+P27,smartphone,SM-N960N,lfJhTQAzQh
+P27,wearable,Galaxy Watch4 Classic,Z/k9lFuEE7
+P27,wearable,Galaxy Fit2,IKN/MVfA8q
+P28,smartphone,SM-N986N,QNhNZVkuJv
+P28,wearable,Galaxy Watch4,LqYnT0Xs6A
+P29,smartphone,SM-G998N,rk0l0a2JRI
+P29,wearable,Galaxy Watch4 Classic,aJuc/IZ1ii
+P30,smartphone,SM-G960N,P0HbMFp5HK
+P30,wearable,Galaxy Watch Active2,+5auwrrV4G
+P31,smartphone,SM-G973N,P0xSDuYZlN
+P31,wearable,Galaxy Watch4,OAyMSkG890
+P32,smartphone,iPhone 6,vIGKhHyw4I
+P32,wearable,Galaxy Watch,bZztH/XwYd
+P33,smartphone,SM-G981N,ygbyP0F3u1
+P33,wearable,Galaxy Watch3,n8LKInx0oR
+P34,smartphone,SM-N986N,dcgD+kDsnP
+P34,wearable,Gear S3,T8x2YW+ymp
+P35,smartphone,SM-G781N,bJJenGaIOi
+P35,wearable,Galaxy Watch4,EuHCkxQIYs
+P36,smartphone,SM-N976N,4Sn5KWtUrq
+P36,wearable,Galaxy Watch4,4ZvHrziN80
+P36,wearable,Galaxy Watch4 Classic,xjZdZbkbUM
+P36,wearable,Galaxy Watch Active2,alPUGqtPd7
+P36,wearable,Galaxy Watch4 Classic,3PXV8ei7Ho
+P37,smartphone,SM-G977N,OAFkT6BcQa
+P37,wearable,Galaxy Watch4,LzuqtZXxdN
+P38,wearable,Galaxy Watch Active2,GPAG8DwJO3
+P38,smartphone,SM-G970N,adlav1DQ9p
+P39,smartphone,SM-G991N,7kbKgzPy7Z
+P39,wearable,Galaxy Fit2,KrFaxbyQmD
+P40,smartphone,SM-G973N,KBrcSO38Ih
+P40,wearable,Galaxy Watch4,OxJhJ/B6GV
+P41,smartphone,SM-G981N,IGzxVRQgYZ
+P41,wearable,Galaxy Watch Active2,Ugjl6c7+gX
+P42,smartphone,SM-N981N,Hya0Gxmwtu
+P42,wearable,Galaxy Watch4,0UiGAc5CKv
+P43,smartphone,SM-N986N,cD3rdwdaHh
+P43,wearable,Galaxy Watch4,6G42T4AT2z
+P44,smartphone,SM-N986N,cD3rdwdaHh
+P44,wearable,Galaxy Watch4,6G42T4AT2z
+P45,wearable,Galaxy Watch3,n498ePN8u6
+P45,smartphone,SM-N971N,qGf4DLfOtJ
+P46,smartphone,SM-G998N,nOQQxcCCAz
+P46,wearable,Galaxy Watch4,7Hdmn0zk3a
+P46,wearable,Galaxy Watch4,tO7evAJ/wv
+P46,wearable,Galaxy Watch4,1lYqwCv3n+
+P46,wearable,Galaxy Watch4,ozr/vY8fre
+P47,smartphone,SM-G970N,8HySC1T0Wm
+P47,wearable,Galaxy Fit2,zdcBw8IyvY
+P47,wearable,Galaxy Watch4,95MsBv5Cv6
+P48,smartphone,SM-G977N,/jGQbjaN5A
+P48,wearable,Galaxy Watch4 Classic,gfFrx7z2A9
+P48,wearable,Galaxy Watch4 Classic,2R1DoZFA+2
+P48,wearable,Galaxy Watch4 Classic,owS9fjfgnM
+P48,wearable,Galaxy Watch4 Classic,1QEDOR2l7S
+P48,wearable,Galaxy Watch4 Classic,slzTfLkpJ4
+P48,wearable,Galaxy Watch4 Classic,cBDstwEfX9
+P49,smartphone,SM-G885S,y3QZgpyQRP
+P49,wearable,Galaxy Watch Active2,eyBgT68yQ9
+P50,wearable,Galaxy Watch3,wAOxO97g4S
+P51,smartphone,SM-N971N,cTdqnSoqPi
+P51,wearable,Galaxy Watch Active2,y2POZE3YgO
+P53,smartphone,SM-N976N,lLuihBO/H4
+P53,wearable,Galaxy Fit2,1wGp1nDuOy
+P53,wearable,Galaxy Watch Active2,vT1RNUS35V
+P54,smartphone,SM-G977N,yqZhEq74yv
+P54,wearable,Galaxy Watch Active,c/eaIrbQ7z
+P55,smartphone,SM-N971N,Yx7xNGMl5v
+P56,smartphone,SM-G986N,me4aOL1kdh
+P56,wearable,Galaxy Fit2,CLs5hEvzc8
+P57,smartphone,SM-N976N,HROkbW/l0l
+P57,wearable,Galaxy Watch4,Vbq7luiwfB
+P57,wearable,Galaxy Watch Active2,rvEdt6YFDd
+P58,smartphone,SM-G975N,H+Z7fnaA5S
+P58,wearable,Galaxy Watch Active2,0wPaUv5+uD
+P59,smartphone,SM-F700N,Czl1THVs94
+P59,wearable,Galaxy Fit2,ltcA0AEb0+
+P60,wearable,Galaxy Watch Active2,7Jos2QNbqd
+P60,smartphone,SM-N986N,cD3rdwdaHh
+P60,wearable,Galaxy Watch4,6G42T4AT2z
+P61,smartphone,SM-G977N,EBgToqOjHL
+P61,wearable,Galaxy Watch4 Classic,PBMF001oNL
+P62,smartphone,SM-G981N,ocDJzp640B
+P62,wearable,Galaxy Fit,TdBV5RrOQZ
+P63,smartphone,SM-N976N,1U/kgR+GDG
+P64,smartphone,SM-G991N,0e84eNnVHm
+P64,wearable,Galaxy Watch4 Classic,4NoEGqlcOq
+P64,wearable,Galaxy Watch,YCIOgEcrCD
+P65,smartphone,SM-F711N,RpUi4N/EWv
+P65,wearable,Galaxy Watch4,f96EYInKUS
+P66,smartphone,SM-G781N,Q8HSPiTTxf
+P66,wearable,Galaxy Watch4,NheB5sXdrJ
+P67,wearable,Galaxy Fit2,IO0kI1UG3Y
+P68,smartphone,SM-G973N,Plk1epsbeR
+P68,wearable,Galaxy Watch4,vyjdVBvmJk
+P69,smartphone,SM-N975F,GS+GR+y/bV
+P69,wearable,Galaxy Watch Active,+ay7UCdop4
+P70,smartphone,LM-V500N,z9ApSI2rs3
+P70,wearable,Gear S3,9ijclr5uU5
+P71,smartphone,SM-G991N,TcmqC5Y5WR
+P71,wearable,Galaxy Watch4,ybtFRb1X/R
+P72,smartphone,SM-N960N,57nW1WO5p3
+P72,wearable,Galaxy Watch4,ht7OAVgw9G
+P73,smartphone,SM-N981N,C0Yl7YZh4o
+P73,wearable,Galaxy Watch4 Classic,Iij3MAkBQ7
+P74,smartphone,SM-G977N,8UzArj2ffT
+P74,wearable,Galaxy Watch3,bY4OrHuwIB
+P75,smartphone,SM-G970N,45LKR3CVGM
+P75,wearable,Galaxy Fit2,TRogvgqG9w
+P76,smartphone,SM-G970N,45LKR3CVGM
+P76,wearable,Galaxy Watch4,Az8flK07HY
+P77,smartphone,SM-N976N,0XdFam56LT
+P77,wearable,Galaxy Watch4,VWtjrNQXZe
+P78,smartphone,SM-G977N,Fareq3X5pj
+P78,wearable,Galaxy Watch Active2,KqmfoZQtdv
+P79,smartphone,SM-F711N,HmIJf28g/y
+P79,wearable,Galaxy Watch Active2,RtFmiDR71T
+P80,smartphone,SM-N976N,VIHvwnWQtu
+P80,wearable,Galaxy Fit2,q+zdkj/ZfA
+P81,smartphone,SM-A716S,mMjCEgXB8V
+P81,wearable,Galaxy Watch Active2,hxf0nMS+gC
+P82,smartphone,SM-N960N,3vdaeep0vC
+P82,wearable,Galaxy Watch3,XUt0F2Oqik
+P84,wearable,Galaxy Watch Active,LOvq0xwXXz
+P84,smartphone,SM-N971N,tlKEeKeQte
+P84,smartphone,SM-N935S,cWOkwZBDU7
+P85,smartphone,SM-N976N,h97cj5cRDf
+P85,wearable,Galaxy Watch4,cqHI7kzoYB
+P86,smartphone,SM-G965N,Zm6JGo5OZr
+P86,smartphone,SM-G930S,ndMSIxwfQd
+P87,smartphone,SM-N986N,bJchNUta3A
+P87,wearable,Galaxy Watch3,VwEPKZE57f
+P88,smartphone,SM-N950N,A5KrPYViNo
+P88,wearable,Galaxy Watch4,pkvK4A3LrD
+P89,smartphone,SM-A516N,sMUb9B4A5P
+P89,wearable,Galaxy Fit2,+c9T/UWBf2
+P90,smartphone,SM-N976N,t1fjjMgR3F
+P90,wearable,Galaxy Watch3,biJs7gh0X2
+P91,smartphone,SM-G998N,4qNdyOwT3G
+P91,smartphone,SM-G960N,boseNjVhYd
+P91,wearable,Galaxy Watch3,DuV1ecgLJQ
+P92,smartphone,SM-N976N,Mwcy1dJ9hq
+P92,wearable,Galaxy Watch Active2,fybl9ebQrz
+P93,smartphone,SM-G986N,Yp7d9gF19g
+P93,smartphone,SM-A520L,LMmlSTiFJL
+P94,wearable,Galaxy Watch4 Classic,5KpqZqxjCw
+P95,smartphone,SM-G973N,ve7N7tCfKt
+P95,wearable,Galaxy Watch3,H+2mai7VHb
+P96,smartphone,SM-N971N,cTdqnSoqPi
+P96,wearable,Galaxy Watch Active2,y2POZE3YgO
+P97,smartphone,SM-G960N,cw9sRjnYT4
+P97,wearable,Galaxy Fit2,ea+TctqHoH
+P97,wearable,Gear S3,CYY3A/rveB
+P97,wearable,Galaxy Watch4,61Pe2peZ9I
+P97,smartphone,SM-F711N,FTgjFk65os
+P98,smartphone,SM-F926N,fJlEW1pKqE
+P98,wearable,Galaxy Watch Active2,V10t2fg+fB
+P99,smartphone,SM-G981N,jEWzaO9Lb8
+P99,wearable,Galaxy Watch,cVUeHDFVrW
+P99,wearable,Galaxy Watch4 Classic,8Git46mBoi
+P99,smartphone,SM-F711N,Ut3Vq2utuA
