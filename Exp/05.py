@@ -28,7 +28,7 @@ for btype in ['both','phone','watch']:
     
 for i in range(2):
     ax[i].set_xticks(np.arange(n_user)+.5)
-    ax[i].set_xticklabels(["P" + str(user).zfill(2) for user in bratio.index], rotation =45, ha='center', fontsize= 7)
+    ax[i].set_xticklabels([user for user in bratio.index], rotation =45, ha='center', fontsize= 7)
     ax[i].set_xlabel('Participants')
     ax[i].set_ylabel('Ratio' if i == 0 else '# of step')
     ax[i].legend()

@@ -56,42 +56,42 @@ for idx, folder in enumerate(sorted(os.listdir(raw_dir))):
                 header=0,
                 names=["device_group", "uuid"],
             )
-        elif len(glob.glob(os.path.join(raw_dir, f"{folder}/**/com.samsung.health.step_count.*.csv"), recursive= True)) != 0 :
-            raw = pd.read_csv(
-                glob.glob(
-                    os.path.join(
-                        raw_dir,
-                        f"{folder}/**/com.samsung.health.step_count.*.csv",
-                    ),
-                    recursive=True,
-                )[0],
-                index_col = False,
-                skiprows=[0],
-                header=0,
-            )
-            raw = raw[['speed','count','deviceuuid','distance','start_time','calorie']]
-            raw.columns = ['speed','step','uuid','distance','timestamp','calorie']
-            # Timestamp was logged as UTC+000, so convert it to UTC+900, also it was loaded as string, so convert to datetime object
-            raw['timestamp'] = [ timestamp.replace("오전", "AM").replace("오후","PM")
-                for timestamp in raw['timestamp'].values
-            ]
-            raw["timestamp"] = [
-                timestamp + dt.timedelta(hours=9)
-                for timestamp in pd.to_datetime(raw["timestamp"], format="%Y. %m. %d. %H:%M:%S" if folder == "P25" else "%Y. %m. %d. %p %I:%M:%S")
-            ]
-            # device profile의 uuid와 Device_group을 통해서 wearable과 Mobile 분류
-            device_profile = pd.read_csv(
-                glob.glob(
-                    os.path.join(
-                        raw_dir, f"{folder}/**/com.samsung.health.device_profile.*.csv"
-                    ),
-                    recursive=True,
-                )[0],
-                skiprows=[0],
-                usecols=[ord("M") - ord("A"), ord("I") - ord("A")],
-                header=0,
-                names=["device_group", "uuid"],
-            )
+        # elif len(glob.glob(os.path.join(raw_dir, f"{folder}/**/com.samsung.health.step_count.*.csv"), recursive= True)) != 0 :
+        #     raw = pd.read_csv(
+        #         glob.glob(
+        #             os.path.join(
+        #                 raw_dir,
+        #                 f"{folder}/**/com.samsung.health.step_count.*.csv",
+        #             ),
+        #             recursive=True,
+        #         )[0],
+        #         index_col = False,
+        #         skiprows=[0],
+        #         header=0,
+        #     )
+        #     raw = raw[['speed','count','deviceuuid','distance','start_time','calorie']]
+        #     raw.columns = ['speed','step','uuid','distance','timestamp','calorie']
+        #     # Timestamp was logged as UTC+000, so convert it to UTC+900, also it was loaded as string, so convert to datetime object
+        #     raw['timestamp'] = [ timestamp.replace("오전", "AM").replace("오후","PM")
+        #         for timestamp in raw['timestamp'].values
+        #     ]
+        #     raw["timestamp"] = [
+        #         timestamp + dt.timedelta(hours=9)
+        #         for timestamp in pd.to_datetime(raw["timestamp"], format="%Y. %m. %d. %H:%M:%S" if folder == "P25" else "%Y. %m. %d. %p %I:%M:%S")
+        #     ]
+        #     # device profile의 uuid와 Device_group을 통해서 wearable과 Mobile 분류
+        #     device_profile = pd.read_csv(
+        #         glob.glob(
+        #             os.path.join(
+        #                 raw_dir, f"{folder}/**/com.samsung.health.device_profile.*.csv"
+        #             ),
+        #             recursive=True,
+        #         )[0],
+        #         skiprows=[0],
+        #         usecols=[ord("M") - ord("A"), ord("I") - ord("A")],
+        #         header=0,
+        #         names=["device_group", "uuid"],
+        #     )
         else:
             raise Exception("No Step count folder exist")
         

@@ -4,8 +4,8 @@ cur = os.path.splitext(os.path.basename(__file__))[0]
 df = loadDF()
 users = list(set(df['uid']))
 
-nrows, ncols = 2, 1
-fig, ax = plt.subplots(nrows = nrows, ncols= ncols, figsize= (9, 4.8*nrows))
+nrows, ncols = 1, 2
+fig, ax = plt.subplots(nrows = nrows, ncols= ncols, figsize= (6.3*2, 4.8*1))
 
 start, end, bsize = 0, 1000, 50
 n_level = (end-start)//bsize
@@ -18,7 +18,7 @@ df['level'] = [getLevel(step) for step in df['step'].to_numpy()]
 df = df.query('level < @n_level')
 df = getBoutInfo(df, ['level'])
 for i in range(n_level):
-    print(f"Level {str(i).zfill(2)}")
+    print(f"Level {str(i).zfill(2)}, {[start + i*bsize, start+(i+1)*bsize]}")
     for btype in ['b','p','w']:
         print("# of {}: {:.2f}".format(btype, df.loc[i][btype+'weight']))
 total = df['totalcount'].to_numpy()

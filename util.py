@@ -8,14 +8,14 @@ import os, glob
 cwd = os.getcwd()
 data_dir = os.path.join(cwd,'Data')
 user_dir = os.path.join(data_dir, 'Users')
-fig_dir = os.path.join(cwd,"Refactoring","Fig")
+fig_dir = os.path.join(cwd,"Fig")
 color = {'phone': '#1f77b4', 'watch':'#ff7f0e', 'both': '#2ca02c'}
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 
 def loadDF():
-    df = pd.read_csv(os.path.join(os.getcwd(),"Data_",'bout.csv'), header = 0)
+    df = pd.read_csv(os.path.join(data_dir,'bout.csv'),index_col = 0, header = 0)
     for val in ['first','last','date']:
         df[val] = pd.to_datetime(df[val])
     tmp = df.groupby(['uid','btype']).agg(step = ('step','sum'))
@@ -29,33 +29,34 @@ def loadDF():
 def getBoutInfo(df, groupby):
     columns = []
     btypes = ['b','p','w']
-
-    for metric in ['ratio', 'step','weight', 'count']:
-            for btype in ['b','p','w']:
+    for metric in ['step_ratio', 'step','count_ratio', 'count']:
+            for btype in btypes:
                 columns.append(btype+metric)
     columns.append('totalstep')
     columns.append('totalcount')
     if df.shape[0] == 0:
         return pd.DataFrame([],columns= columns)
     tmp = df.groupby([*groupby,"btype"]).agg(step = ("step","sum"), number = ('step','count'))
-    tmp = tmp.reindex(['b','p','w'],level = len(groupby))
+    tmp = tmp.reindex(btypes,level = len(groupby))
     tmp = tmp.unstack(level=len(groupby), fill_value = 0)
     tmp = tmp.apply(lambda x: np.concatenate((x[:3]/np.sum(x[:3]), x[:3], x[3:]/np.sum(x[3:]), x[3:], np.sum(x[:3]).reshape(1), np.sum(x[3:]).reshape(1))),axis = 1,  result_type='expand')
     tmp.columns = columns
     return tmp
 
 def comparingGroup(df, group, elem,ax):
-    groups = set(df[group])
+    groups = sorted(set(df[group]))
+    print(groups)
     n_group = len(groups)
     bratio = getBoutInfo(df, ['uid',group, elem])
     arrs = []
     for btype in ['b','p','w']:
         for is_group in groups:
-            arrs.append(bratio.query(f'{group} == @is_group')[btype+'ratio'])
-    
+            arrs.append(bratio.query(f'{group} == @is_group')[btype+'step_ratio'])
     ax.boxplot(x = arrs, positions=[*np.arange(n_group),*(np.arange(n_group)+n_group+1), *(np.arange(n_group)+2*n_group+2)], showfliers= False)
     ax.set_xticks([(n_group-1)/2, n_group*3/2 + 1/2, n_group*5/2 +3/2])
     ax.set_xticklabels(['Both','Phone','Watch'])
     for idx, btype in enumerate(['both','phone','watch']):
         F, pVal = stats.f_oneway(*arrs[idx*n_group:(idx+1)*n_group])
         print(f'{btype} ratio shows F: {F}, pVal: {"{:.3f}".format(pVal)}')
+        for gidx in range(n_group):
+            print(f"{gidx} =  Mean: {np.median(arrs[idx*n_group+gidx])}, SD: {np.percentile(arrs[idx*n_group+gidx],[25,75])}")

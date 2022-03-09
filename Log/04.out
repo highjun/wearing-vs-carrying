@@ -1,80 +1,80 @@
-Level 00
+Level 00, [0, 50]
 # of b: 0.16
 # of p: 0.36
 # of w: 0.48
-Level 01
+Level 01, [50, 100]
 # of b: 0.50
 # of p: 0.21
 # of w: 0.29
-Level 02
+Level 02, [100, 150]
 # of b: 0.63
 # of p: 0.18
 # of w: 0.19
-Level 03
+Level 03, [150, 200]
 # of b: 0.68
 # of p: 0.17
 # of w: 0.15
-Level 04
+Level 04, [200, 250]
 # of b: 0.72
 # of p: 0.16
 # of w: 0.11
-Level 05
+Level 05, [250, 300]
 # of b: 0.72
 # of p: 0.17
 # of w: 0.10
-Level 06
+Level 06, [300, 350]
 # of b: 0.74
 # of p: 0.16
 # of w: 0.10
-Level 07
+Level 07, [350, 400]
 # of b: 0.78
 # of p: 0.16
 # of w: 0.06
-Level 08
+Level 08, [400, 450]
 # of b: 0.77
 # of p: 0.15
 # of w: 0.08
-Level 09
+Level 09, [450, 500]
 # of b: 0.76
 # of p: 0.16
 # of w: 0.08
-Level 10
+Level 10, [500, 550]
 # of b: 0.80
 # of p: 0.15
 # of w: 0.05
-Level 11
+Level 11, [550, 600]
 # of b: 0.78
 # of p: 0.15
 # of w: 0.07
-Level 12
+Level 12, [600, 650]
 # of b: 0.78
 # of p: 0.16
 # of w: 0.06
-Level 13
+Level 13, [650, 700]
 # of b: 0.80
 # of p: 0.15
 # of w: 0.04
-Level 14
+Level 14, [700, 750]
 # of b: 0.77
 # of p: 0.18
 # of w: 0.05
-Level 15
+Level 15, [750, 800]
 # of b: 0.77
 # of p: 0.19
 # of w: 0.04
-Level 16
+Level 16, [800, 850]
 # of b: 0.78
 # of p: 0.16
 # of w: 0.05
-Level 17
+Level 17, [850, 900]
 # of b: 0.75
 # of p: 0.18
 # of w: 0.07
-Level 18
+Level 18, [900, 950]
 # of b: 0.79
 # of p: 0.17
 # of w: 0.04
-Level 19
+Level 19, [950, 1000]
 # of b: 0.83
 # of p: 0.12
 # of w: 0.05

@@ -6,13 +6,14 @@ from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+
 import os
 import pandas as pd
-from util import color
+import datetime as dt
 
 app = dash.Dash(__name__)
 cwd = os.getcwd()
-user_dir  =os.path.join(cwd,"Data_")
+user_dir  =os.path.join(cwd,"Data","Users")
 users = sorted([file.split(".csv")[0] for file in os.listdir(user_dir)])
 
 color = {'phone': '#1f77b4', 'watch':'#ff7f0e'}
@@ -27,31 +28,46 @@ def getPlotlyGraph(uid,date):
         date = start
     elif date > end:
         date = end
-    plots = make_subplots(rows=2, cols=1, specs=[[{}], [{}]], 
+    fig = make_subplots(rows=2, cols=1, specs=[[{}], [{}]], 
                         shared_xaxes=True, shared_yaxes=True, 
                         horizontal_spacing=0, vertical_spacing=0)
+    datas = []
     for idx, device in enumerate(['phone','watch']):
-        tmp = udf.query("device == @device")
+        datas.append(udf.query("device == @device"))
         hovertemplate = []
         columns = ['step', 'weekday', 'timestamp', 'speed','distance','calorie']
-        for row in tmp[columns].to_numpy():
+        for row in datas[idx][columns].to_numpy():
             desc = ''
             for cdx, column in enumerate(columns):
                 desc += f'{column}: {row[cdx]}<br>\n'
             hovertemplate.append(desc)
-        plots.append_trace(
-            go.Bar(x=tmp["timestamp"], y= tmp["step"] , orientation='v', showlegend=True, hovertemplate = hovertemplate, name=device,  marker=dict(color= color[device])),
-            idx+1, 1)
-    plots.update_yaxes(fixedrange = True,range = [0,200], row=1,col= 1)
-    plots.update_yaxes(fixedrange = True,range = [-200,0], row=2,col= 1)
-    plots.update_xaxes(range= [date, date + dt.timedelta(days = 1)])
-    return plots, date
+        fig.append_trace(
+            go.Bar(x=datas[idx]["timestamp"], y= datas[idx]["step"] *(1-2*idx) , orientation='v', showlegend=True, hovertemplate = hovertemplate, name=device,  marker=dict(color= color[device])),
+            row = idx+1, col = 1)
+    fig.update_yaxes(fixedrange = True, range = [0,200], row=1,col= 1)
+    fig.update_yaxes(fixedrange = True, range = [-200,0], row=2,col= 1)
+    fig.update_xaxes(range= [date, date + dt.timedelta(days = 1)])
+    fig.update_layout(
+        yaxis = dict(
+            tickmode = 'array',
+            tickvals = [0, 100, 200],
+            ticktext = [0, 100, 200],
+            title = 'Smartphone'
+        ),
+        yaxis2 = dict(
+            tickmode = 'array',
+            tickvals = [0, -100, -200],
+            ticktext = [0, 100, 200],
+            title = 'Wearable'
+        )
+    )
+    return fig, date
 
 app.layout = html.Span(children=[
     dcc.Dropdown(
         id='uid',
         options= [{'label': i, 'value':i} for i in users],
-        value = 'P00',
+        value = 'P01',
     ),
     dcc.DatePickerSingle(
         id='date',
@@ -75,4 +91,4 @@ def cb_render(uid, date):
     return graph, date
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)

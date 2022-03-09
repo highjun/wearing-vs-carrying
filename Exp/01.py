@@ -3,7 +3,7 @@ from util import *
 cur = os.path.splitext(os.path.basename(__file__))[0]
 
 # Minute Level Correlation Coefficient
-df = pd.read_csv(os.path.join(data_dir,'integrate.csv'), index_col = 0, header = 0)
+df = pd.read_csv(os.path.join(data_dir,'integrate.csv'), index_col = False, header = 0)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df = df.set_index(['uid', 'timestamp', 'device'])[['step']]
 df = df.unstack(level = 2, fill_value = 0)
