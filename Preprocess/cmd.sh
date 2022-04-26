@@ -1,14 +1,12 @@
-python3 -m unzip
+python3 -m Preprocess.unzip
 echo 'unzip done'
-python3 -m preprocess
+python3 -m Preprocess.meta
+echo 'process metafile'
+python3 -m Preprocess.preprocess
 echo 'preprocess done'
-python3 -m integrate
+python3 -m Preprocess.anony
+echo 'anonymize files'
+python3 -m Preprocess.integrate
 echo 'integrate done'
-python3 -m make_bout
+python3 -m Preprocess.make_bout
 echo 'bouts done'
-
-for file in $(ls Exp | grep \.py$ | sed -e 's/\.py$//')
-do
-    python3 -m Exp.$file > Log/$file.out
-    echo "$file have processed"
-done

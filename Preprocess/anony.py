@@ -5,7 +5,7 @@ from tqdm import tqdm
 cwd = os.getcwd()
 print(cwd)
 
-for idx,name in enumerate(sorted(os.listdir("Raws"))):
+for name in tqdm(sorted(os.listdir("Raws"))):
     folder = os.path.join("Raws",name)
     while len(os.listdir(folder))== 1:
         folder = os.path.join(folder, os.listdir(folder)[0])
@@ -17,4 +17,3 @@ for idx,name in enumerate(sorted(os.listdir("Raws"))):
         else:
             os.remove(other)     
     shutil.make_archive(f"AnonyZips/{name}", 'zip', folder)
-    print(name, "done!")

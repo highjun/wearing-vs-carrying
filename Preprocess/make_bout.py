@@ -1,12 +1,14 @@
+from numpy import False_
 from util import data_dir, os, pd, np
 
 data_path  = os.path.join(data_dir, 'integrate.csv')
-df = pd.read_csv(data_path, index_col= False, header = 0)
+df = pd.read_csv(data_path, index_col= False, header = 0)[['uid','timestamp','device','step']]
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 
-features = ['step','distance','speed','calorie','run','walk']
+# features = ['step','distance','speed','calorie','run','walk']
+features= ['step']
 btypes = ['phone','watch']
-df = df.set_index(['uid', 'timestamp','device'])[features]
+df = df.set_index(['uid', 'timestamp','device'])
 df  =df.unstack(level = 2)
 df = df.reset_index()
 columns =['uid','timestamp']
@@ -28,8 +30,9 @@ df['bidx'] = bidx # bout idx
 for feature in features:
     df[feature] = df[['phone_'+feature, 'watch_'+feature]].mean(axis = 1)
 
-summable = ['step', 'distance', 'run', 'walk', 'calorie']
-meanable = ['speed']
+# summable = ['step', 'distance', 'run', 'walk', 'calorie']
+# meanable = ['speed']
+summable = ['step']
 dict = {'first':('timestamp','first'), 'last':('timestamp','last')}
 for feature in features:
     for prefix in ['watch_','phone_','']:

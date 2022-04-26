@@ -1,11 +1,12 @@
 from util import *
+from tqdm import tqdm
 
 cwd = os.getcwd()
 src = os.path.join(cwd, "Raws")
 target = os.path.join(cwd, "Data")
 
 dics = []
-for idx, folder in enumerate(sorted(os.listdir(src))):
+for folder in tqdm(sorted(os.listdir(src))):
     dic = {}
     valid = True
     try:
@@ -43,10 +44,10 @@ for idx, folder in enumerate(sorted(os.listdir(src))):
             valid = False
             raise Exception("No device found for wearable or mobile")
     except Exception as e:
-        print(f"Error in {folder}: {e}")
         valid = False
     dic['UID'] =  folder
     dic['VALID'] = valid    
     dics.append(dic)
 meta = pd.DataFrame(dics)
+print(meta.query("VALID == True").shape[0], " is valid")
 meta.to_csv(os.path.join(target,"meta.csv"), index = False)
