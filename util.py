@@ -51,12 +51,18 @@ def comparingGroup(df, group, elem,ax):
     arrs = []
     for btype in ['b','p','w']:
         for is_group in groups:
-            arrs.append(bratio.query(f'{group} == @is_group')[btype+'step_ratio'])
+            if btype == 'b':
+                arrs.append(bratio.query(f'{group} == @is_group')[btype+'step_ratio'])
+            else: 
+                arrs.append(bratio.query(f'{group} == @is_group')['bstep_ratio'].values + bratio.query(f'{group} == @is_group')[btype+'step_ratio'].values)
     ax.boxplot(x = arrs, positions=[*np.arange(n_group),*(np.arange(n_group)+n_group+1), *(np.arange(n_group)+2*n_group+2)], showfliers= False)
     ax.set_xticks([(n_group-1)/2, n_group*3/2 + 1/2, n_group*5/2 +3/2])
     ax.set_xticklabels(['Both','Phone','Watch'])
     for idx, btype in enumerate(['both','phone','watch']):
-        F, pVal = stats.f_oneway(*arrs[idx*n_group:(idx+1)*n_group])
-        print(f'{btype} ratio shows F: {F}, pVal: {"{:.3f}".format(pVal)}')
+        print(btype)
         for gidx in range(n_group):
-            print(f"{gidx} =  Mean: {np.median(arrs[idx*n_group+gidx])}, SD: {np.percentile(arrs[idx*n_group+gidx],[25,75])}")
+            print(f"{gidx} =  Median: {np.median(arrs[idx*n_group+gidx])}, SD: {np.percentile(arrs[idx*n_group+gidx],[25,75])}")
+        for A_gpidx in range(n_group):
+            for B_gpidx in range(n_group):
+                F, pVal = stats.f_oneway(arrs[idx*n_group + A_gpidx], arrs[idx*n_group + B_gpidx])
+                print(f'{A_gpidx, B_gpidx} comparison  F: {F}, pVal: {"{:.3f}".format(pVal)}')

@@ -1,0 +1,97 @@
+Wearable,Smartphone,typeB,UID,VALID
+"Gear Fit2, Gear S3","ZTE-V9VITA, SM-G973N",False,P01,True
+Galaxy Watch,"SM-G965N, SM-G991N",False,P02,True
+Galaxy Watch4,"SM-A716S, SM-T733",False,P03,True
+Galaxy Watch,"SM-N976N, SM-N986N",False,P04,True
+"Gear Fit2, Galaxy Watch4",SM-N986N,False,P05,True
+Galaxy Fit2,SM-N986N,False,P06,True
+Gear S3,"SM-F711N, SM-N976N",False,P07,True
+"Galaxy Fit2, Galaxy Watch4",SM-N971N,False,P08,True
+Galaxy Watch4,SM-N971N,False,P10,True
+Galaxy Watch4 Classic,SM-N976N,False,P12,True
+Galaxy Watch3,SM-N986N,False,P13,True
+Galaxy Watch Active2,"SM-G991N, SM-G887N",False,P14,True
+Galaxy Watch Active2,SM-G887N,False,P15,True
+Galaxy Fit2,SM-G977N,False,P16,True
+Galaxy Watch,SM-N986N,False,P17,True
+,SM-G975F,False,P18,False
+Galaxy Watch4,SM-G998N,False,P19,True
+,SM-G973N,False,P20,False
+Galaxy Watch,SM-G975N,False,P21,True
+Galaxy Watch Active2,SM-G986N,False,P22,True
+Galaxy Watch Active2,SM-N976N,False,P23,True
+Galaxy Watch4,SM-G991N,False,P24,True
+Galaxy Fit2,iPhone 6,True,P25,True
+Galaxy Watch4 Classic,SM-F907N,False,P26,True
+"Galaxy Watch4 Classic, Galaxy Fit2",SM-N960N,False,P27,True
+Galaxy Watch4,SM-N986N,False,P28,True
+Galaxy Watch4 Classic,SM-G998N,False,P29,True
+Galaxy Watch Active2,SM-G960N,False,P30,True
+Galaxy Watch4,SM-G973N,False,P31,True
+Galaxy Watch,iPhone 6,True,P32,True
+Galaxy Watch3,SM-G981N,False,P33,True
+Gear S3,SM-N986N,False,P34,True
+Galaxy Watch4,SM-G781N,False,P35,True
+"Galaxy Watch4 Classic, Galaxy Watch Active2, Galaxy Watch4",SM-N976N,False,P36,True
+Galaxy Watch4,SM-G977N,False,P37,True
+Galaxy Watch Active2,SM-G970N,False,P38,True
+Galaxy Fit2,SM-G991N,False,P39,True
+Galaxy Watch4,SM-G973N,False,P40,True
+Galaxy Watch Active2,SM-G981N,False,P41,True
+Galaxy Watch4,SM-N981N,False,P42,True
+Galaxy Watch4,SM-N986N,False,P43,True
+Galaxy Watch4,SM-N986N,False,P44,True
+Galaxy Watch3,SM-N971N,False,P45,True
+Galaxy Watch4,SM-G998N,False,P46,True
+"Galaxy Fit2, Galaxy Watch4",SM-G970N,False,P47,True
+Galaxy Watch4 Classic,SM-G977N,False,P48,True
+Galaxy Watch Active2,SM-G885S,False,P49,True
+Galaxy Watch3,,False,P50,False
+Galaxy Watch Active2,SM-N971N,False,P51,True
+,,,P52,False
+"Galaxy Fit2, Galaxy Watch Active2",SM-N976N,False,P53,True
+Galaxy Watch Active,SM-G977N,False,P54,True
+,SM-N971N,False,P55,False
+Galaxy Fit2,SM-G986N,False,P56,True
+"Galaxy Watch Active2, Galaxy Watch4",SM-N976N,False,P57,True
+Galaxy Watch Active2,SM-G975N,False,P58,True
+Galaxy Fit2,SM-F700N,False,P59,True
+"Galaxy Watch Active2, Galaxy Watch4",SM-N986N,False,P60,True
+Galaxy Watch4 Classic,SM-G977N,False,P61,True
+Galaxy Fit,SM-G981N,False,P62,True
+,SM-N976N,False,P63,False
+"Galaxy Watch4 Classic, Galaxy Watch",SM-G991N,False,P64,True
+Galaxy Watch4,SM-F711N,False,P65,True
+Galaxy Watch4,SM-G781N,False,P66,True
+Galaxy Fit2,,False,P67,False
+Galaxy Watch4,SM-G973N,False,P68,True
+Galaxy Watch Active,SM-N975F,False,P69,True
+Gear S3,LM-V500N,False,P70,True
+Galaxy Watch4,SM-G991N,False,P71,True
+Galaxy Watch4,SM-N960N,False,P72,True
+Galaxy Watch4 Classic,SM-N981N,False,P73,True
+Galaxy Watch3,SM-G977N,False,P74,True
+Galaxy Fit2,SM-G970N,False,P75,True
+Galaxy Watch4,SM-G970N,False,P76,True
+Galaxy Watch4,SM-N976N,False,P77,True
+Galaxy Watch Active2,SM-G977N,False,P78,True
+Galaxy Watch Active2,SM-F711N,False,P79,True
+Galaxy Fit2,SM-N976N,False,P80,True
+Galaxy Watch Active2,SM-A716S,False,P81,True
+Galaxy Watch3,SM-N960N,False,P82,True
+Galaxy Watch Active,"SM-N971N, SM-N935S",False,P84,True
+Galaxy Watch4,SM-N976N,False,P85,True
+,"SM-G965N, SM-G930S",False,P86,False
+Galaxy Watch3,SM-N986N,False,P87,True
+Galaxy Watch4,SM-N950N,False,P88,True
+Galaxy Fit2,SM-A516N,False,P89,True
+Galaxy Watch3,SM-N976N,False,P90,True
+Galaxy Watch3,"SM-G998N, SM-G960N",False,P91,True
+Galaxy Watch Active2,SM-N976N,False,P92,True
+,"SM-G986N, SM-A520L",False,P93,False
+Galaxy Watch4 Classic,,False,P94,False
+Galaxy Watch3,SM-G973N,False,P95,True
+Galaxy Watch Active2,SM-N971N,False,P96,True
+"Gear S3, Galaxy Fit2, Galaxy Watch4","SM-F711N, SM-G960N",False,P97,True
+Galaxy Watch Active2,SM-F926N,False,P98,True
+"Galaxy Watch, Galaxy Watch4 Classic","SM-F711N, SM-G981N",False,P99,True

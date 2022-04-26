@@ -11,8 +11,8 @@
 1. Comparing how ratio varies by watch usage
 1. Calculate impact and contribution of Single Device Day
 1. Calculate how Exercise Behavior contributes to differences
-1. Hypothesis Testing of Exponential Distribution or not
+1. Hypothesis Testing of Simularity of Each imputation's Distribution
 1. Variation of Specific Users in Date
 1. Total Contribtution to Difference from our finding
-1. State Changing
+1. State Duration of each device
 1. Clustering By Their Day Ratio

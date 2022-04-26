@@ -1,10 +1,5 @@
 **/__pycache__
-.ipynb_checkpoints
-.vscode
-Data
 Zips
+AnonyZips
 Raws
-
-LDA/*.pk
-LDA/*.out
-LDA/*.png
+env

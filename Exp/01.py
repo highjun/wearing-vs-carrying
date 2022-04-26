@@ -22,7 +22,7 @@ total_diff = df[['phone','watch']].diff(axis = 1)['watch'].to_numpy()
 total_diff = np.sum(np.abs(total_diff))
 phone = df.query("watch == 0 ")["phone"].to_numpy().sum()
 watch = df.query("phone == 0")["watch"].to_numpy().sum()
-print("Total Difference 중의 Phone의 비율과 Watch의 비율: ")
+print("Phone, Watch, Both bout ratio of Total difference")
 print(f"Phone: {round(phone/total_diff*100,1)}% , Watch: {round(watch/total_diff*100,1)}%, Both: {round((1- (phone+ watch)/total_diff)*100,1)}%")
 print("-"*20)
 

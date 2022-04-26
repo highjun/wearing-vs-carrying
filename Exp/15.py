@@ -21,7 +21,7 @@ single = tmp.loc[mask, 'index'].values
 # Exercise Behavior
 threshold= 100 
 df['SPM'] = [step/duration for step, duration in df[['step','duration']].to_numpy()]
-exercise = df.query("(SPM > 100 and step > 1000) or step > 3000")
+exercise = df.query("SPM > 125 or step > 3000")
 exercise = exercise.query("btype != 'b'")
 exercise = exercise['index']
 
